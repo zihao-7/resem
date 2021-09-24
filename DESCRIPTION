@@ -1,0 +1,19 @@
+Package: ReSEM
+Title: Rerandomized Survey Experiment
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Zihao",
+           family = "Yang",
+           role = c("aut", "cre"),
+           email = "zihaoy3@illinois.edu")
+Description: This package includes functions for conducting ReSEM(Rerandomized Survey Experiment using Mahalanobis distance). You can use functions in this package to generate sampling and treatment assignment indicators. You can also compute difference-in-means estimators and confidence intervals for the average treatment effect.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+        license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+NeedsCompilation: no
+Packaged: 2021-09-24 18:45:52 UTC; zihaoyang
+Author: Zihao Yang [aut, cre]
+Maintainer: Zihao Yang <zihaoy3@illinois.edu>
