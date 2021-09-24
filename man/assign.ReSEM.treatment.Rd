@@ -18,7 +18,7 @@ assign.ReSEM.treatment(n, n1, X, prob.T)
 \value{
 A list with the elements
 \item{ind.assign}{An assignment vector of length \code{n}, where we use 1 for treated units, and 0 for control units. }
-\item{{M.T}{The corresponding Mahalanobis distance. }
+\item{M.T}{The corresponding Mahalanobis distance. }
 }
 \description{
 Generates treatment-control assignment under rerandomization using the Mahalanobis distance.

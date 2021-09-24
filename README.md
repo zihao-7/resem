@@ -8,7 +8,7 @@ library(devtools)
 install_github("zihao-7/resem")
 
 ## Library the package
-library(resem)
+library(ReSEM)
 
 ## Explanation for the main functions
 ?assign.ReSEM.sampling

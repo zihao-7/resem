@@ -20,7 +20,7 @@ assign.ReSEM.sampling(num.assign, N, n, W, prob.S)
 \value{
 A list with the elements
 \item{ind.assign}{A \code{num.assign} by \code{N} sampling matrix. Each row of the sampling matrix is a \code{N}-dimensional vector that represents one sampling result, where we use 0 for sampled units, and -1 for units that will not enter the experiment. }
-\item{{M.S.all}{An vector of length \code{num.assign}, which stores the Mahalanobis distances corresponding to each sampling. }
+\item{M.S.all}{An vector of length \code{num.assign}, which stores the Mahalanobis distances corresponding to each sampling. }
 }
 \description{
 Generates sampling indicators under rejective sampling using the Mahalanobis distance.

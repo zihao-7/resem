@@ -14,6 +14,6 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2021-09-24 18:45:52 UTC; zihaoyang
+Packaged: 2021-09-24 19:00:05 UTC; zihaoyang
 Author: Zihao Yang [aut, cre]
 Maintainer: Zihao Yang <zihaoy3@illinois.edu>

@@ -10,7 +10,7 @@
 #'
 #' @return A list with the elements
 #' \item{ind.assign}{A \code{num.assign} by \code{N} sampling matrix. Each row of the sampling matrix is a \code{N}-dimensional vector that represents one sampling result, where we use 0 for sampled units, and -1 for units that will not enter the experiment. }
-#' \item{{M.S.all}{An vector of length \code{num.assign}, which stores the Mahalanobis distances corresponding to each sampling. }
+#' \item{M.S.all}{An vector of length \code{num.assign}, which stores the Mahalanobis distances corresponding to each sampling. }
 #' @export
 assign.ReSEM.sampling <- function(num.assign, N, n, W, prob.S) {
   ind.assign = matrix(-1, nrow = num.assign, ncol = N)
@@ -45,7 +45,7 @@ assign.ReSEM.sampling <- function(num.assign, N, n, W, prob.S) {
 #'
 #' @return A list with the elements
 #' \item{ind.assign}{An assignment vector of length \code{n}, where we use 1 for treated units, and 0 for control units. }
-#' \item{{M.T}{The corresponding Mahalanobis distance. }
+#' \item{M.T}{The corresponding Mahalanobis distance. }
 #' @export
 assign.ReSEM.treatment <- function(n, n1, X, prob.T) {
   ind.assign = rep(0, n)
