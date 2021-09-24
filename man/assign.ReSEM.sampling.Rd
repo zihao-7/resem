@@ -9,9 +9,9 @@ assign.ReSEM.sampling(num.assign, N, n, W, prob.S)
 \arguments{
 \item{num.assign}{Number of assignments to be generated.}
 
-\item{N}{Size of finite population.}
+\item{N}{Size of the finite population.}
 
-\item{n}{Number of sampled units.}
+\item{n}{Number of the sampled units.}
 
 \item{W}{An \code{N} by J matrix which contains J dimensional covariate vector for each unit, available at the sampling stage.}
 
@@ -19,7 +19,7 @@ assign.ReSEM.sampling(num.assign, N, n, W, prob.S)
 }
 \value{
 A list with the elements
-\item{ind.assign}{A \code{num.assign} by \code{N} sampling matrix. Each row of the sampling matrix is a \code{N}-dimensional vector that represents one sampling result, where we use 0 for sampled units, and -1 for units that will not enter the experiment. }
+\item{ind.assign}{A \code{num.assign} by \code{N} sampling matrix. Each row of the sampling matrix is an \code{N}-dimensional vector that represents one sampling result, where we use 0 for sampled units, and -1 for units that will not enter the experiment. }
 \item{M.S.all}{An vector of length \code{num.assign}, which stores the Mahalanobis distances corresponding to each sampling. }
 }
 \description{

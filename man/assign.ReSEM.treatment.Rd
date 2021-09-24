@@ -9,7 +9,7 @@ assign.ReSEM.treatment(n, n1, X, prob.T)
 \arguments{
 \item{n}{Number of units to assign.}
 
-\item{n1}{Number of treated units.}
+\item{n1}{Number of the treated units.}
 
 \item{X}{An \code{n} by K matrix which contains K dimensional covariate vector for each unit, available at the treatment assignment stage.}
 

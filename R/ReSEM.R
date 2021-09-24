@@ -3,13 +3,13 @@
 #' Generates sampling indicators under rejective sampling using the Mahalanobis distance.
 #'
 #' @param num.assign Number of assignments to be generated.
-#' @param N Size of finite population.
-#' @param n Number of sampled units.
+#' @param N Size of the finite population.
+#' @param n Number of the sampled units.
 #' @param W An \code{N} by J matrix which contains J dimensional covariate vector for each unit, available at the sampling stage. 
 #' @param prob.S Asymptotic acceptance probability for the sampling stage.
 #'
 #' @return A list with the elements
-#' \item{ind.assign}{A \code{num.assign} by \code{N} sampling matrix. Each row of the sampling matrix is a \code{N}-dimensional vector that represents one sampling result, where we use 0 for sampled units, and -1 for units that will not enter the experiment. }
+#' \item{ind.assign}{A \code{num.assign} by \code{N} sampling matrix. Each row of the sampling matrix is an \code{N}-dimensional vector that represents one sampling result, where we use 0 for sampled units, and -1 for units that will not enter the experiment. }
 #' \item{M.S.all}{An vector of length \code{num.assign}, which stores the Mahalanobis distances corresponding to each sampling. }
 #' @export
 assign.ReSEM.sampling <- function(num.assign, N, n, W, prob.S) {
@@ -39,7 +39,7 @@ assign.ReSEM.sampling <- function(num.assign, N, n, W, prob.S) {
 #' Generates treatment-control assignment under rerandomization using the Mahalanobis distance.
 #'
 #' @param n Number of units to assign.
-#' @param n1  Number of treated units.
+#' @param n1  Number of the treated units.
 #' @param X An \code{n} by K matrix which contains K dimensional covariate vector for each unit, available at the treatment assignment stage.
 #' @param prob.T Asymptotic acceptance probability for the treatment assignment stage.
 #'
