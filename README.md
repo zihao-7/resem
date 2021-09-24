@@ -1,4 +1,4 @@
-# Rerandomized Survey Experiment using Mahalanobis distance
+# Rerandomized Survey Experiment using Mahalanobis distance  
  
  This package includes functions for conducting ReSEM(Rerandomized Survey Experiment using Mahalanobis distance). You can use functions in this package to generate sampling and treatment assignment indicators. You can also compute difference-in-means estimators and confidence intervals for the average treatment effect.
 
