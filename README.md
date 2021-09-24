@@ -47,8 +47,8 @@ C[,1] = as.numeric( runif(N) <= 0.5 )
 C[,2] = rnorm(N)
 
 C[,3] = as.numeric( runif(N) <= 0.5 )
-C[,4] = rnorm(N)
 
+C[,4] = rnorm(N)
 
 C[,5] = as.numeric( runif(N) <= 0.5 )
 
