@@ -91,19 +91,25 @@ for (k in 1:nrow(ind.ReSEM.all)) {
   
 }
 
-### point estimators
+### difference-in-means estimator, and regression adjusted difference-in-means estimators
 tau.diff.ReSEM = rep(NA, iter.max)
+
+tau.reg.ReSEM = rep(NA, iter.max)
 
 for(iter in 1:iter.max){
 
   tau.diff.ReSEM[iter] = diff.in.means( ind.ReSEM.all[iter,], Y = obs.outcome(ind.ReSEM.all[iter,], Y1, Y0) )
   
+  tau.reg.ReSEM[iter] = diff.reg( ind.ReSEM.all[iter,], Y = obs.outcome(ind.ReSEM.all[iter,], Y1, Y0), C, E )
+  
 }
 
-### CIs
+### CIs for the two estimators
 alpha = 0.05
 
-CI.all = matrix(NA, nrow=iter.max, ncol=2)
+CI.diff.all = matrix(NA, nrow=iter.max, ncol=2)
+
+CI.reg.all = matrix(NA, nrow=iter.max, ncol=2)
 
 for (k in 1:iter.max) {
 
@@ -111,9 +117,14 @@ for (k in 1:iter.max) {
   
   Y = obs.outcome(assignment, Y1, Y0)
   
-  CI.all[k,] = CI.ReSEM(assignment, Y, X, W, C, E, alpha, design ="ST") 
+  CI.diff.all[k,] = CI.ReSEM(assignment, Y, X, W, C, E, alpha, design ="ST") 
+  
+  CI.reg.all[k,] = CI.ReSEM(assignment, Y, X, W, C, E, alpha, design ="ST.adjusted") 
   
 }
 
-coverage.CI = mean( mean(tau) > CI.all[,1] & mean(tau) < CI.all[,2] )
+coverage.CI.diff = mean( mean(tau) > CI.diff.all[,1] & mean(tau) < CI.diff.all[,2] )
+
+coverage.CI.reg = mean( mean(tau) > CI.reg.all[,1] & mean(tau) < CI.reg.all[,2] )
+
 
