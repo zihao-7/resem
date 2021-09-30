@@ -15,9 +15,9 @@ library(ReSEM)
 
 ?assign.ReSEM.treatment
 
-?diff.in.means
+?dif.means
 
-?diff.reg
+?dif.reg
 
 ?CI.ReSEM
 
@@ -98,9 +98,9 @@ tau.reg.ReSEM = rep(NA, iter.max)
 
 for(iter in 1:iter.max){
 
-  tau.diff.ReSEM[iter] = diff.in.means( ind.ReSEM.all[iter,], Y = obs.outcome(ind.ReSEM.all[iter,], Y1, Y0) )
+  tau.diff.ReSEM[iter] = dif.means( ind.ReSEM.all[iter,], Y = obs.outcome(ind.ReSEM.all[iter,], Y1, Y0) )
   
-  tau.reg.ReSEM[iter] = diff.reg( ind.ReSEM.all[iter,], Y = obs.outcome(ind.ReSEM.all[iter,], Y1, Y0), C, E )
+  tau.reg.ReSEM[iter] = dif.reg( ind.ReSEM.all[iter,], Y = obs.outcome(ind.ReSEM.all[iter,], Y1, Y0), C, E )
   
 }
 
