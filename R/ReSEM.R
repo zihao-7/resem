@@ -90,7 +90,7 @@ obs.outcome <- function(assignment, Y1, Y0){
 #' 
 #' @return Difference-in-means estimator for the average treatment effect.
 #' @export 
-diff.in.means <- function(assignment, Y){
+dif.means <- function(assignment, Y){
   return( mean(Y[assignment==1]) - mean( Y[assignment==0] ) )
 }
 
@@ -105,7 +105,7 @@ diff.in.means <- function(assignment, Y){
 #
 #' @return Regression-adjusted difference-in-means estimator for the average treatment effect, with estimated adjustment coefficients.
 #' @export 
-diff.reg <- function(assignment, Y, C, E){
+dif.reg <- function(assignment, Y, C, E){
   delta.E = colMeans( E[assignment >= 0, ] ) - colMeans(E)
   tau.C = colMeans( C[assignment == 1, ] ) - colMeans( C[assignment == 0, ] )
   beta.1 = as.numeric( lm(Y[assignment==1] ~ C[assignment==1, ])$coefficients )[-1]
@@ -193,30 +193,36 @@ CI.ReSEM <- function(assignment, Y, X, W, C, E, alpha=0.05, design){
   
   if (design == "CRSE") {
     QR = c(qnorm(alpha/2), qnorm(1-alpha/2))
-    CI = diff.in.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
+    CI = dif.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
   }
   if (design == "S") {
     QR = quantile( ifelse(R2.S<=1, sqrt(1-R2.S), 0) * epsilon + sqrt(R2.S) * L.J.aS,
                    probs = c(alpha/2, 1-alpha/2) ) 
-    CI = diff.in.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
+    CI = dif.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
   }
   if (design == "T") {
     QR = quantile( ifelse(R2.T<=1, sqrt(1-R2.T), 0) * epsilon + sqrt(R2.T) * L.K.aT,
                    probs = c(alpha/2, 1-alpha/2) )
-    CI = diff.in.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
+    CI = dif.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
   }
   if (design == "ST") {
     QR = quantile( ifelse(R2.S+R2.T<=1, sqrt(1-R2.S-R2.T), 0) * epsilon 
                    + sqrt(R2.S) * L.J.aS + sqrt(R2.T) * L.K.aT, 
                    probs = c(alpha/2, 1-alpha/2) ) 
-    CI = diff.in.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
+    CI = dif.means(assignment, Y) + sqrt(V.tt) * unname(QR) / sqrt(n)
   }
   if (design == "ST.adjusted") {
     QR = ifelse(R2.E+R2.C<=1, sqrt(1-R2.E-R2.C), 0) * c(qnorm(alpha/2), qnorm(1-alpha/2))
-    CI = diff.reg(assignment, Y, C, E) + sqrt(V.tt) * unname(QR) / sqrt(n)
+    CI = dif.reg(assignment, Y, C, E) + sqrt(V.tt) * unname(QR) / sqrt(n)
   }
   return(CI)
 }
+
+# load package
+if (! "Runuran" %in% installed.packages()) { 
+  install.packages("Runuran")
+}
+library(Runuran)
 
 #' Generate constrained Gaussian
 #' 
@@ -229,17 +235,15 @@ CI.ReSEM <- function(assignment, Y, X, W, C, E, alpha=0.05, design){
 #' @return A vector of length \code{num}, which contains iid constrained Gaussian random variables.
 #' @export 
 generate.constrained.Gaussian <- function(num, K, a){
-  L.K.a = rep(NA, num)
-  for (i in 1:num) {
-    repeat{
-      D = rnorm(K)
-      if (sum(D^2) <= a) {
-        break
-      }
-    }
-    L.K.a[i] = D[1]
+  chi_aK = sqrt(urchisq(num, df=K, lb=0, ub=a))
+  S = 2 * rbinom(num, 1, prob=0.5) - 1
+  if (K >= 2) {
+    beta_K = rbeta(num, shape1=1/2, shape2=(K-1)/2)
+  } else {
+    beta_K = 1
   }
-  return(L.K.a) 
+  L = chi_aK * S * sqrt(beta_K)
+  return(L)
 }
 
 
