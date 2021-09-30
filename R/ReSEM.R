@@ -222,6 +222,7 @@ CI.ReSEM <- function(assignment, Y, X, W, C, E, alpha=0.05, design){
 #' 
 #' Generates constrained Gaussian random variables.
 #'
+#' @importFrom Runuran urchisq
 #' @param num Number of constrained Gaussian random variables to generate.
 #' @param K Dimension of the Gaussian vector used to generate constrained Gaussian random variable.
 #' @param a Threshold used to generate constrained Gaussian random variable.
@@ -229,11 +230,6 @@ CI.ReSEM <- function(assignment, Y, X, W, C, E, alpha=0.05, design){
 #' @return A vector of length \code{num}, which contains iid constrained Gaussian random variables.
 #' @export 
 generate.constrained.Gaussian <- function(num, K, a){
-  if (! "Runuran" %in% installed.packages()) { 
-    install.packages("Runuran")
-  }
-  library(Runuran)
-  
   chi_aK = sqrt(urchisq(num, df=K, lb=0, ub=a))
   S = 2 * rbinom(num, 1, prob=0.5) - 1
   if (K >= 2) {
